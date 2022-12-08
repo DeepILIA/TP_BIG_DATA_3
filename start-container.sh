@@ -5,7 +5,6 @@ docker network create --driver=bridge hadoop1
 # the default node number is 3
 N=${1:-3}
 
-xhost +
 # start hadoop master container
 docker rm -f hadoop-master &> /dev/null
 echo "start hadoop-master container..."
@@ -15,11 +14,9 @@ docker run -itd \
                 -p 8088:8088 \
 		-p 7077:7077 \
 		-p 16010:16010 \
-		-e DISPLAY=$DISPLAY \
-		-v /tmp/.X11-unix:/tmp/.X11-unix \
-                --name hadoop-master \
-                --hostname hadoop-master \
-                amine2733/spark-hadoop &> /dev/null
+        --name hadoop-master \
+        --hostname hadoop-master \
+        amine2733/spark-hadoop &> /dev/null
 
 
 # start hadoop slave container
